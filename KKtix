@@ -1,0 +1,48 @@
+from os import times
+from select import select
+import numpy as np
+from bs4 import BeautifulSoup
+import requests
+from datetime import datetime
+import jsons
+import pandas as pd
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.ui import Select
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.by import By 
+import time
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait as wait
+
+class webcrawler:
+    def __init__(self,url):
+        self.url = url
+        self.record_str = []
+    def __call__(self):
+         # Banned from the website
+        option =webdriver.ChromeOptions()
+        option.add_experimental_option("detach",True)
+        driver = webdriver.Chrome(ChromeDriverManager().install(),options=option)
+        driver.get(self.url)
+        sel= driver.find_element(By.CLASS_NAME, "kkbox.btn-login")
+        sel.click()
+        sel2 = driver.find_element(By.ID, "kk_id_login")
+        sel2.click()
+        enterElement=driver.find_element(By.ID,"show-username")
+        enterElement.send_keys("19980126fu@gmail.com")
+        enterElement2=driver.find_element(By.ID,"show-password")
+        enterElement2.send_keys("19980126fu")
+        submit = driver.find_element(By.ID, "btn-submit")
+        submit.click()
+        driver.get("https://leopards.kktix.cc/events/c9367f25")
+
+
+  
+
+
+if __name__ == "__main__": 
+
+    ss = webcrawler(url="https://kktix.com/users/sign_in?back_to=https%3A%2F%2Fkktix.com%2F")
+    web = ss()
+
